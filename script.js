@@ -3,32 +3,32 @@ const url = window.location.toString();
 const date = new Date();
 const loader = document.getElementById('loader');
 
-const showLoader = () => {
+const cleanLoader = () => {
 	loader.style.display = 'none';
 }
 
 const getUsernameFromUrl = (url) => {
-	let splitOfUrl = url.split('=');
-	let stringOfUsername  = splitOfUrl[1];
-	if (stringOfUsername == undefined) {
-		stringOfUsername = 'lunar616';
-	}
-	return stringOfUsername;
+  let splitOfUrl = url.split('=');
+  let stringOfUsername  = splitOfUrl[1];
+  if (stringOfUsername == undefined) {
+    stringOfUsername = 'lunar616';
+  }
+  return stringOfUsername;
 }
 
 const getDate = new Promise((resolve, reject) =>
-	setTimeout(() => date ? resolve(date) : reject('Время неизвестно'), 2000)
+  setTimeout(() => date ? resolve(date) : reject('Время неизвестно'), 2000)
 );
 
 const getRequest = fetch(`https://api.github.com/users/${getUsernameFromUrl(url)}`);
 
 Promise.all([getRequest, getDate])
-	.then(([request, date]) => {
-		requestFromPromise = request;
-		dateFromPromise = date;
-	})
+  .then(([request, date]) => {
+    requestFromPromise = request;
+    dateFromPromise = date;
+  })
   .then(res => requestFromPromise.json())
-	.then(user => {
+  .then(user => {
     avatarOfUser = user.avatar_url;
     bioOfUser = user.bio;
     urlOfUser = user.url;
@@ -52,9 +52,9 @@ Promise.all([getRequest, getDate])
     addImg();
   })
   .then(res => {
-  	const date = document.createElement('p');
-  	date.innerHTML = `${dateFromPromise}`;
-  	body.appendChild(date);
-  	showLoader();
+    const date = document.createElement('p');
+    date.innerHTML = `${dateFromPromise}`;
+    body.appendChild(date);
+    cleanLoader();
   })
-	.catch(err => alert('Информация о пользователе не доступна'));
+  .catch(err => alert('Информация о пользователе не доступна'));
