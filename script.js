@@ -2,7 +2,7 @@ const body = document.body;
 const url = window.location.toString();
 const date = new Date();
 const loader = document.getElementById('loader');
-const requestFromPromise, dateFromPromise;
+const requestFromPromise, dateFromPromise, avatarOfUser, bioOfUser, urlOfUser;
 
 const cleanLoader = () => loader.style.display = 'none';
 
