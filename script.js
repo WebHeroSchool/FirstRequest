@@ -2,9 +2,11 @@ const body = document.body;
 const url = window.location.toString();
 const date = new Date();
 const loader = document.getElementById('loader');
-const requestFromPromise, dateFromPromise, avatarOfUser, bioOfUser, urlOfUser;
+let requestFromPromise, dateFromPromise;
 
-const cleanLoader = () => loader.style.display = 'none';
+const cleanLoader = () => {
+	loader.style.display = 'none';
+}
 
 const getUsernameFromUrl = (url) => {
   let splitOfUrl = url.split('=');
